@@ -1,59 +1,52 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a-scene
+  mindar-image="imageTargetSrc: ./targets.mind;
+                filterMinCF: 0.05;
+                filterBeta: 20;
+                warmupTolerance: 3;
+                missTolerance: 10;"
+  color-space="sRGB"
+  renderer="colorManagement: true; physicallyCorrectLights: false; width: 1920; height: 1080;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+>
+      <a-assets>
+        <a-asset-item id="avatarModel" src="./lcw_v5.glb"></a-asset-item>
+        <!-- Replace with your GLB model path -->
+      </a-assets>
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+      <!-- First target -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model
+          src="#avatarModel"
+          position="0 0 0"
+          scale="1 1 1"
+          rotation="90 0 0"
+          animation-mixer="clip: toynar_dance; loop: repeat; crossFadeDuration: 0"
+        ></a-gltf-model>
+      </a-entity>
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="savetify">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>savetify</title>
-  <link rel="manifest" href="manifest.json">
-
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "893059733";
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
-</head>
-<body>
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-  </script>
-</body>
+      <!-- Second target -->
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-gltf-model
+          src="#avatarModel"
+          position="0 0 0"
+          scale="1 1 1"
+          rotation="90 0 0"
+          animation-mixer="clip: toynar_dance; loop: repeat; crossFadeDuration: 0"
+        ></a-gltf-model>
+      </a-entity>
+    </a-scene>
+  </body>
 </html>
